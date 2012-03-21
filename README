@@ -3,10 +3,10 @@ AS400 Nagios Plugin, v 0.21, March 21 2012
 
 ********************************************************************************************
 *          WARNING                          WARNING                       WARNING          *
-*																						   *
+*                                                                                          *
 * Version 0.21 has been modifire to work with IBM i V7R1 and will most likely not work     *
 * on earlier version of IBM i OS.                                                          *
-*																						   *
+*                                                                                          *
 ********************************************************************************************
 
 
@@ -46,8 +46,6 @@ or
 
 In the cases where it is hanging, execute the above command wait about 15 seconds for it to process through to where it hangs, and terminate it with a CTRL-C.
 
-Then simply email me the debug.log file at conard@richwv.net
-
 Enjoy!
 
-If you have suggestions or would like to submit bugs, visit the main page at sourceforge http://www.sourceforge.net/project/nas400plugin/ or email me at brdude@gmail.com 
+If you have suggestions or would like to submit bugs, visit the main page at github https://github.com/brdude/check_as400/issues or email me at brdude@gmail.com 
