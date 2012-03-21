@@ -1,0 +1,73 @@
+AS400 Nagios/Icinga Plugin - Installation instructions
+----------------------------------------------------
+
+Preinstall notes
+-------------------
+* Make sure you modify the JAVA_START path in the check_as400 script.
+
+* Security Note: Realize that this plugin communicates to the AS400 via telnet, which is easy to sniff and capture user names and passwords.  Use a generic user with restrictive rights for the plugin. The user needs access to wrksyssts, wrkoutq, wrkactjob, dspjob, dspsbsd and dspmsg.
+
+
+Quick And Easy
+-----------------
+* For languages other than English you will need to recompile the plugin before continuing.  Refer to steps 1 and 2 of the Manual installation section below.
+
+* Type 
+
+   ./install
+
+* Modify your $NAGIOS_PATH/libexec/.as400 with the correct user and password
+
+* Add the contents of the checkcommands.example file into your $NAGIOS/etc/checkcommands.cfg 
+
+* Add services to your nagios configuration.  There are examples in the services.example file.
+
+* Add dependencies to your nagios configuration.  There are examples in the dependency.example file.
+
+* DONE!
+
+
+Manual Installation 
+-------------------
+1) If you use a language other than English, re-link the proper language source class from the ./langs directory by typing
+
+	rm check_as400_lang.java
+	ln -s langs/check_as400_lang_(your language).java .
+
+2) Compile the plugin:
+
+	javac check_as400.java
+
+3) Copy all .class files to nagios/libexec if you are using nagios or icinga/libexec if you are using icinga.
+
+	cp *.class /usr/nagios/libexec
+	or
+	cp *.class /usr/local/icinga/libexec
+
+4) Copy the check_as400 script to nagios/libexec if you are using nagios or icinga/libexec if you are using icinga.
+	
+	cp check_as400 /usr/nagios/libexec
+	or
+	cp check_as400 /usr/local/icinga/libexec
+
+5) Add the contents of checkcommands.example to your checkcommands.cfg
+
+6) Create a file in nagios/libexec if you are using nagios or icinga/libexec if you are using icinga,
+   called .as400, with contents matching that of the file example.as400.  This file contains the user
+   name and password used to login to the as400.
+
+7) Change the user and group of these files to your nagios user. 
+
+Security Note! Set the permissions of the nagios/libexec/.as400 file you created in step 5 to 700.
+This way only the nagios user can read the contents of this file.
+
+	cd /usr/nagios/libexec
+
+	chown nagios:nagios *.class check_as400 .as400 
+	chmod 700 .as400 
+
+8) Add services to your nagios configuration.  There are examples in the services.example file.
+
+Enjoy!
+
+

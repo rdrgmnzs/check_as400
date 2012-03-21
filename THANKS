@@ -1,0 +1,20 @@
+*********************
+ Nagios AS400 Plugin
+*********************
+
+Thanks
+---------------
+
+*Hats off to Goran Almvik for helping me test the plugin on varying versions of OS/400.
+
+*To Boer, André for submitting his debug logs. Thus enabling me to change some things so they would be language independent. Also for converting things to German.
+
+*To everyone for there input with bugs and patches, and for being patient with me! 
+
+Thanks,
+
+
+James C. Richardson
+Richardson Support Network
+Visit us on the web at: http://richwv.net/
+conard@richwv.net

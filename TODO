@@ -1,0 +1,13 @@
+*********************
+ Nagios/Icinga AS400 Plugin
+*********************
+
+TODO
+---------------
+
+*Move .as400 to etc/nas400/.as400 
+
+detect missing -c and -w values when they are needed and provide the user a meaningfull error message
+
+detect missing librarys (QCMN, ASP, CPUC)
+
