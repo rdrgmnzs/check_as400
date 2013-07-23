@@ -1,8 +1,0 @@
-AS400 Nagios Plugin - Upgrade Instructions
-------------------------------------------
-
-At this point, run the install script.  It will be easier.  :-)
-
-Enjoy!
-
-If you have suggestions or would like to submit bugs, visit the main page at github https://github.com/brdude/check_as400/issues or email me at brdude@gmail.com 

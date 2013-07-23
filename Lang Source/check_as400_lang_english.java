@@ -1,7 +1,7 @@
 //Nagios Plugin to check an IBM AS/400
 //
 //Developed September 2004 
-//Last Modified Jan 14 2011
+//Last Modified Jul 4 2013
 //
 //This class is used as a varible structure
 //holding language conversions for parsing tokens 
@@ -16,6 +16,15 @@ public class check_as400_lang{
         //This is found at the bottom when you type dspjob (name of a job 
         //that exists)
 	public String SELECTION="Selection";	
+
+		//This is the status of job or sbs when you type dspjob or dspsbsd
+	public String ACTIVE="ACTIVE";
+	
+		//This is the "DB Capability" dsplay when you type wrksyssts
+	public String DB_CAPABILITY="DB capability";
+	
+		//This is le display for the login screen
+	public String LOGIN_SCREEN="System  . . . . .";
 
         //Run dspmsg and it will display "No messages available" if there are no 
         //messages
@@ -53,16 +62,16 @@ public class check_as400_lang{
         //screen before we send the F3 to exit and disconnect.
 	public String EXIT_SIGNON="Exit sign-on request"; 
 	
-		   //If you type WRKACTJOB it may respond "No active jobs to display"
-	     //when there is no job like searched for in the sytem
+	//If you type WRKACTJOB it may respond "No active jobs to display"
+	//when there is no job like searched for in the sytem
 	public String NO_JOB_TO_DISPLAY="No active jobs to display";
 
         //Messages needing a reply OR Messages not needing a reply
 	public String MSG_NEED_REPLY="Messages needing a reply";
 	public String MSG_NOT_NEED_REPLY="Messages not needing a reply";
-	
-	//WRKDSKSTS The "Request" message.
+
+	//WRKDSKSTS The "Request/Compression/Bottom" message.
 	public String REQUEST_WORD="Request";
 	public String DSK_STS_COMPRESSION="Compression";
-	public String LIST_END="Bottom";
+	public String LIST_END="Bottom";       
 };

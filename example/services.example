@@ -107,16 +107,6 @@ define service{
         check_command                   check_as400_login
         }
 
-# Service definition
-define service{
-        use                             generic-service
-
-        host_name                       as400host
-	check_command			check_as400_CJS!subsystem!job
-	}
-
-
-
 ########### PRINTERS ###########
 	
 # Service definition

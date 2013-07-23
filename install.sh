@@ -1,9 +1,9 @@
 #!/bin/bash
-#NAGIOS_PATH=/usr/nagios
+#NAGIOS_PATH=/usr/local/nagios
 #NAGIOS_USER=nagios
 #NAGIOS_GROUP=nagios
 
-echo "Nagios/Icinga AS400 Plugin Installation Script"
+echo "Nagios Check_AS400 Plugin Installation Script"
 echo
 
 #DON'T MODIFY PAST THIS POINT
@@ -12,7 +12,7 @@ echo
 #Lets define some functions we will need.
 #
 READ_NAGIOS_PATH(){
-  echo -n "Please type the full path to nagios/icinga directory (ex. /usr/nagios or /usr/local/icinga): "
+  echo -n "Please type the full path to nagios directory (ex. /usr/local/nagios): "
   read NAGIOS_PATH
   if [ ! -d $NAGIOS_PATH ]; 
   then 
@@ -22,7 +22,7 @@ READ_NAGIOS_PATH(){
 }
 
 READ_JAVA_PATH(){
-  echo -n "Please type the full path to your java executable (ex. /usr/lib/java/bin/java or /usr/bin/java): "
+  echo -n "Please type the full path to your java executable (ex. /usr/bin/java): "
   read JAVA_PATH
   if [ ! -x $JAVA_PATH ];
   then
@@ -33,12 +33,10 @@ READ_JAVA_PATH(){
 
 DETECT_NAGIOS_OWNER_GROUP(){
   echo
-  echo -n "Are you using nagios or icinga?: "
-  read NAGIOS_OR_ICINGA
-  if [ -e $NAGIOS_PATH/etc/$NAGIOS_OR_ICINGA.cfg ];
+  if [ -e $NAGIOS_PATH/etc/nagios.cfg ];
   then
-    NAGIOS_USER=`cat $NAGIOS_PATH/etc/NAGIOS_OR_ICINGA.cfg |grep -e nagios_user | cut -d= -f2`
-    NAGIOS_GROUP=`cat $NAGIOS_PATH/etc/NAGIOS_OR_ICINGA.cfg |grep -e nagios_group | cut -d= -f2`
+    NAGIOS_USER=`cat $NAGIOS_PATH/etc/nagios.cfg |grep -e nagios_user | cut -d= -f2`
+    NAGIOS_GROUP=`cat $NAGIOS_PATH/etc/nagios.cfg |grep -e nagios_group | cut -d= -f2`
     if [ $NAGIOS_USER ]; 
     then
       if [ $NAGIOS_GROUP ]; 
@@ -47,18 +45,18 @@ DETECT_NAGIOS_OWNER_GROUP(){
       else
 	echo
         echo "ERROR: Unable to detect your nagios user and group. "
-        echo "Is your $NAGIOS_PATH/etc/NAGIOS_OR_ICINGA.cfg properly setup?"
+        echo "Is your $NAGIOS_PATH/etc/nagios.cfg properly setup?"
         exit 1
       fi 
     else
       echo
       echo "ERROR: Unable to detect your nagios user and group. "
-      echo "Is your $NAGIOS_PATH/etc/NAGIOS_OR_ICINGA.cfg properly setup?"
+      echo "Is your $NAGIOS_PATH/etc/nagios.cfg properly setup?"
       exit 1
     fi
   else
     echo
-    echo "ERROR: Your $NAGIOS_PATH/etc/NAGIOS_OR_ICINGA.cfg file does not seem to exist!"
+    echo "ERROR: Your $NAGIOS_PATH/etc/nagios.cfg file does not seem to exist!"
     exit 1
   fi
 }
@@ -88,13 +86,13 @@ cp check_as400 $NAGIOS_PATH/libexec
 if [ ! -e $NAGIOS_PATH/libexec/.as400 ] ;
 then
   echo "Installing .as400 security file..."
-  cp example.as400 $NAGIOS_PATH/libexec/.as400
+  cp example/example.as400 $NAGIOS_PATH/libexec/.as400
   chmod 700 $NAGIOS_PATH/libexec/.as400
 fi
 
 echo "Setting permissions..."
 cd $NAGIOS_PATH/libexec
-chown $NAGIOS_USER:$NAGIOS_GROUP *.class check_as400 .as400
+chown $NAGIOS_USER:$NAGIOS_GROUP check_as400.class check_as400_cmd_vars.class check_as400_lang.class check_as400 .as400
 RESULT=$?
 if [ $RESULT -eq 1 ];
 then
@@ -107,8 +105,8 @@ fi
 echo
 echo "Install Complete!"
 echo
-echo "Be sure and modify your $NAGIOS_PATH/libexec/.as400"
-echo "with the correct user and password."
+echo " !!!!! Be sure and modify your $NAGIOS_PATH/libexec/.as400 "
+echo " !!!!! with the correct user and password.        "
 echo
 echo "Also add the contents of the checkcommands.example file"
 echo "into your $NAGIOS/etc/checkcommands.cfg"

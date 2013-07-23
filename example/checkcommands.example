@@ -80,15 +80,9 @@ define command{
         command_name    check_as400_asp
         command_line    /usr/local/nagios/etc/objects/check_as400/check_as400 -H $HOSTADDRESS$ -v ASP $ARG1$ -w $ARG2$ -c $ARG3$
         }
-
-
-# 'check_as400_jobstatus' command definition
-# check to see if job is existing in Subsystem and has this status.
-# Job checking can be controlled by :
-#	status <status>      = any other status goes to critical
-#       noperm               = don't go to critical if job is not in the system
-# REMARK : if JobStatus is set, it has highest Priority
-
+        
+# 'check_as400_mimix' command definition
 define command{
-	command_name	check_as400_cjs
-	command_line	$USER1$/check_as400 -H $HOSTADDRESS$ -v CJS SUBSYSTEM JOB
+        command_name    check_as400_mimix
+        command_line    /usr/local/nagios/etc/objects/check_as400/check_as400 -H $HOSTADDRESS$ -v MIMIX $ARG1$ -w $ARG2$ -c $ARG3$
+        }
