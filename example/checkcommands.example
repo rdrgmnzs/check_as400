@@ -54,7 +54,7 @@ define command{
 # 'check_as400_outq' command definition
 define command{
         command_name    check_as400_outq
-        command_line    $USER1$/check_as400 -H $ARG1$ -v OUTQ $ARG2$ -w $ARG3$ -c $ARG4$
+        command_line    $USER1$/check_as400 -H $HOSTADDRESS$ -v OUTQ $ARG1$ -w $ARG2$ -c $ARG3$
         }
 
 # 'check_as400_login' command definition
@@ -66,23 +66,23 @@ define command{
 # 'check_as400_DISK Status' command definition
 define command{
         command_name    check_as400_disksts
-        command_line    /usr/local/nagios/etc/objects/check_as400/check_as400 -H $HOSTADDRESS$ -v DISK
+        command_line    $USER1$/check_as400 -H $HOSTADDRESS$ -v DISK
         }
 
 # 'check_as400_qcmn' command definition
 define command{
         command_name    check_as400_qcmn
-        command_line    /usr/local/nagios/etc/objects/check_as400/check_as400 -H $HOSTADDRESS$ -v QCMN -w $ARG1$ -c $ARG2$
+        command_line    $USER1$/check_as400 -H $HOSTADDRESS$ -v QCMN -w $ARG1$ -c $ARG2$
         }
 
 # 'check_as400_asp' command definition
 define command{
         command_name    check_as400_asp
-        command_line    /usr/local/nagios/etc/objects/check_as400/check_as400 -H $HOSTADDRESS$ -v ASP $ARG1$ -w $ARG2$ -c $ARG3$
+        command_line    $USER1$/check_as400 -H $HOSTADDRESS$ -v ASP $ARG1$ -w $ARG2$ -c $ARG3$
         }
-        
+
 # 'check_as400_mimix' command definition
 define command{
         command_name    check_as400_mimix
-        command_line    /usr/local/nagios/etc/objects/check_as400/check_as400 -H $HOSTADDRESS$ -v MIMIX $ARG1$ -w $ARG2$ -c $ARG3$
+        command_line    $USER1$/check_as400 -H $HOSTADDRESS$ -v MIMIX $ARG1$ -w $ARG2$ -c $ARG3$
         }

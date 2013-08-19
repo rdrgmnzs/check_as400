@@ -53,17 +53,6 @@ define service{
         check_command                   check_as400_jobs!21000!23000
         }
 
-# Service definition
-define service{
-        use                             generic-service         ; Name of service template to use
-
-        host_name                      	as400host 
-        service_description            	Fax 
-        contact_groups                  is-all
-
-        check_command                   check_as400_outq!s00175!qffsndfax nw!10!20
-        }
-
 define service{
         use                             generic-service
 
@@ -108,14 +97,25 @@ define service{
         }
 
 ########### PRINTERS ###########
+
+# Service definition
+define service{
+        use                             generic-service         ; Name of service template to use
+
+        host_name                      	as400host 
+        service_description            	OUTQ 
+        contact_groups                  is-all
+
+        check_command                   check_as400_outq!LIBRARY/OUTQ nw!10!20
+        }
 	
 # Service definition
 define service{
-        use                             generic-printer         ; Name of service template to use
+        use                             generic-service         ; Name of service template to use
 
-        host_name                       prtis1
-        service_description            	AS400 OUTQ 
+        host_name                      	as400host 
+        service_description            	OUTQ02
         contact_groups                  is-all
 
-        check_command                   check_as400_outq!s00175!prtis1!10!20
+        check_command                   check_as400_outq!OUTQ02 nf nw!10!20
         }
